@@ -4,52 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NicoSMP | Bulletin Board</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts Hierarchy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css?v=2.0">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-logo">Nico<span>SMP</span></div>
-        <div class="nav-links">
-            <a href="https://nicosmp.net">Home</a>
-            <a href="#" class="active">Forums</a>
-            <a href="https://store.nicosmp.net">Store</a>
+    <!-- Header Navigation Grid -->
+    <header class="site-header">
+        <div class="container nav">
+            <a href="https://nicosmp.net" class="logo">
+                <span class="logo-mark">NICO</span>
+                <span class="logo-slash">//</span>
+                <span class="logo-text">SMP</span>
+            </a>
+            <nav class="navigation">
+                <a href="https://nicosmp.net">Home</a>
+                <a href="#" class="active">Forums</a>
+                <a href="https://store.nicosmp.net">Store</a>
+                <a href="https://discord.gg/MkN5u7WVQe" target="_blank">Discord</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Forum Layout Container -->
-    <div class="forum-container">
+    <main class="forum-layout container">
         
-        <!-- Main Content Feed -->
-        <main class="bulletin-feed">
-            <h2 class="section-title">📢 Server Announcements</h2>
-            <div id="announcements-list">
-                <!-- Announcements will be automatically generated here by script.js -->
+        <!-- Left Column: Announcements or Tickets -->
+        <section class="bulletin-feed">
+            
+            <!-- View Controls -->
+            <div class="feed-tabs">
+                <button id="tab-announcements" class="tab-btn active">📢 ANNOUNCEMENTS</button>
+                <button id="tab-tickets" class="tab-btn">✉️ APPLICATIONS & SUPPORT</button>
             </div>
-        </main>
 
-        <!-- Sidebar Widgets -->
-        <aside class="forum-sidebar">
-            <div class="sidebar-box server-status">
-                <h3>Server Status</h3>
-                <div class="status-indicator">
-                    <span class="dot online"></span>
-                    <p>IP: <b>play.nicosmp.net</b></p>
+            <!-- Announcements Area -->
+            <div id="view-announcements" class="view-panel">
+                <h2 class="section-title">// SERVER ANNOUNCEMENTS</h2>
+                <div id="announcements-list">
+                    <!-- Loaded dynamically via script.js -->
                 </div>
             </div>
 
-            <div class="sidebar-box discord-widget">
-                <h3>Need Support?</h3>
-                <p>Want to apply for staff or open a player report? Join our community Discord server.</p>
-                <a href="#" class="sidebar-btn">Join Discord</a>
+            <!-- Tickets & Staff Apps Area -->
+            <div id="view-tickets" class="view-panel hidden">
+                <h2 class="section-title">// SUBMIT A TICKET OR STAFF APPLICATION</h2>
+                
+                <form id="ticket-form" class="brutal-form">
+                    <div class="form-group">
+                        <label for="ticket-user">Minecraft Username</label>
+                        <input type="text" id="ticket-user" required placeholder="e.g. Nico">
+                    </div>
+                    <div class="form-group">
+                        <label for="ticket-type">Ticket Type</label>
+                        <select id="ticket-type">
+                            <option value="staff_app">Staff Application</option>
+                            <option value="bug_report">Bug Report / Exploit</option>
+                            <option value="player_report">Player Report</option>
+                            <option value="general_help">General Support Ticket</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ticket-msg">Detailed Message / Application Details</label>
+                        <textarea id="ticket-msg" rows="6" required placeholder="Explain your request, age, play-hours, or bug details clearly..."></textarea>
+                    </div>
+                    <button type="submit" class="brutal-btn">SUBMIT DISCORD TICKET</button>
+                </form>
+                <p id="ticket-status" class="status-msg"></p>
             </div>
+
+            <!-- Hidden Admin Panel Area -->
+            <div id="admin-panel" class="view-panel hidden">
+                <h2 class="section-title">👑 NICOSMP ADMIN DASHBOARD</h2>
+                <form id="admin-form" class="brutal-form">
+                    <div class="form-group">
+                        <label for="admin-title">Announcement Title</label>
+                        <input type="text" id="admin-title" required placeholder="e.g. Drop Dupe Patch Notes">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-author">Author Name</label>
+                        <input type="text" id="admin-author" required placeholder="Nico">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-body">Content Markup Text</label>
+                        <textarea id="admin-body" rows="6" required placeholder="Write the system update contents here..."></textarea>
+                    </div>
+                    <div class="admin-actions">
+                        <button type="submit" class="brutal-btn text-black">PUBLISH POST</button>
+                        <button type="button" id="admin-reset" class="brutal-btn danger">WIPE ALL CUSTOM POSTS</button>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- Right Column: Sidebar Node Management -->
+        <aside class="forum-sidebar">
+            
+            <div class="sidebar-box info-block">
+                <h3>// SERVER RUNTIME</h3>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <p>Fetching network node...</p>
+                </div>
+            </div>
+
+            <div class="sidebar-box gallery-block">
+                <h3>// DISCORD LINK</h3>
+                <p>Need instant community support or voice channels? Hit our permanent link below.</p>
+                <a href="https://discord.gg/MkN5u7WVQe" target="_blank" class="sidebar-btn brutal-btn">JOIN SERVER</a>
+            </div>
+
+            <!-- Hidden Access Route Button -->
+            <button id="secret-dashboard-trigger" class="secret-link">System Admin Login Mode</button>
         </aside>
 
-    </div>
+    </main>
 
-    <footer>
-        <p>&copy; 2026 NicoSMP. Not affiliated with Mojang Studios.</p>
+    <footer class="brutal-footer">
+        <div class="container footer-content">
+            <strong>NICOSMP FORUMS</strong>
+            <p>&copy; 2026 NICOSMP. NOT AFFILIATED WITH MOJANG STUDIOS.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
