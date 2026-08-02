@@ -1,181 +1,230 @@
+/* ==========================================================================
+   NICOSMP FORUMS - MODERN CUSTOM NEO-BRUTALIST STYLING TIER
+   ========================================================================== */
+
 :root {
-    --bg-main: #0f0f12;
-    --bg-card: #16161c;
-    --accent: #00b4d8;
-    --text: #ffffff;
-    --text-muted: #a0a0a5;
-    --border-color: #22222a;
+    --bg: #f5f5f3;
+    --card-bg: #ffffff;
+    --dark-block: #111111;
+    --border: #111111;
+    --text: #111111;
+    --muted: #666666;
+    --accent: #ffe34f;
+    --danger: #ff6b6b;
+    
+    --sp-8: 8px;
+    --sp-16: 16px;
+    --sp-24: 24px;
+    --sp-32: 32px;
+    --sp-48: 48px;
+    --sp-64: 64px;
 }
+
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-main);
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--bg);
     color: var(--text);
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Navbar */
-.navbar {
+/* Typography Scale */
+h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 var(--sp-24) 0; }
+h3 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+p { font-size: 1rem; font-weight: 400; line-height: 1.6; margin: 0; }
+label { font-weight: 700; font-size: 0.95rem; text-transform: uppercase; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--sp-24);
+}
+
+/* Navigation Upgrades */
+.site-header {
+    background-color: var(--card-bg);
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background-color: rgba(22, 22, 28, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
+    height: 70px;
 }
 
-.nav-logo {
+.logo {
     font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.nav-logo span {
-    color: var(--accent);
-}
-
-.nav-links a {
-    color: var(--text-muted);
+    font-weight: 800;
+    letter-spacing: -0.02em;
     text-decoration: none;
-    margin-left: 25px;
+    color: var(--text);
+}
+
+.logo-slash { color: var(--muted); margin: 0 2px; }
+.logo-text { background-color: var(--dark-block); color: var(--card-bg); padding: 2px var(--sp-8); }
+
+.navigation { display: flex; gap: var(--sp-24); }
+.navigation a {
+    color: var(--text);
+    text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s;
+    font-size: 0.95rem;
+    padding: var(--sp-8) var(--sp-16);
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
 }
+.navigation a:hover { background-color: var(--bg); border-color: var(--border); }
+.navigation a.active { background-color: var(--dark-block); color: var(--card-bg); border-color: var(--border); }
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--accent);
-}
-
-/* Main Layout Structure */
-.forum-container {
+/* Layout Grid Configuration */
+.forum-layout {
     display: flex;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    gap: var(--sp-32);
+    margin: var(--sp-48) auto;
 }
 
-.bulletin-feed {
-    flex: 3;
+.bulletin-feed { flex: 2.5; }
+.forum-sidebar { flex: 1; display: flex; flex-direction: column; gap: var(--sp-24); min-width: 280px; }
+
+/* Control View Tabs */
+.feed-tabs {
+    display: flex;
+    gap: var(--sp-16);
+    margin-bottom: var(--sp-32);
 }
 
-.section-title {
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
+.tab-btn {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: var(--sp-12) var(--sp-24);
+    background-color: var(--card-bg);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--border);
+    transition: all 0.1s ease;
 }
 
-/* Announcement Cards */
+.tab-btn.active {
+    background-color: var(--accent);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--border);
+}
+
+.view-panel {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border);
+    padding: var(--sp-32);
+    box-shadow: 6px 6px 0 var(--border);
+}
+
+.view-panel.hidden { display: none; }
+.section-title { border-bottom: 2px solid var(--border); padding-bottom: var(--sp-12); }
+
+/* Cards Styling */
 .announcement-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 20px;
+    background-color: #fafafa;
+    border: 2px solid var(--border);
+    padding: var(--sp-24);
+    margin-bottom: var(--sp-24);
+    box-shadow: 4px 4px 0 var(--border);
 }
 
 .announcement-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: var(--sp-12);
+    margin-bottom: var(--sp-16);
 }
 
-.announcement-header h3 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--accent);
+.announcement-header h3 { color: var(--text); }
+.meta-info { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+.author-tag { background: var(--accent); border: 1px solid var(--border); color: var(--text); padding: 2px var(--sp-8); font-weight: 700; margin-right: var(--sp-8); }
+
+/* Input Controls System */
+.brutal-form { display: flex; flex-direction: column; gap: var(--sp-16); }
+.form-group { display: flex; flex-direction: column; gap: var(--sp-8); }
+
+.brutal-form input, .brutal-form select, .brutal-form textarea {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: var(--sp-12);
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+    outline: none;
 }
 
-.meta-info {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+.brutal-form input:focus, .brutal-form select:focus, .brutal-form textarea:focus {
+    background-color: #ffffff;
+    border-color: var(--border);
 }
 
-.author-tag {
-    background: rgba(0, 180, 216, 0.15);
-    color: var(--accent);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-right: 8px;
-}
-
-.announcement-body {
-    line-height: 1.6;
-    color: #e2e2e6;
-}
-
-/* Sidebar Styling */
-.forum-sidebar {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 280px;
-}
-
-.sidebar-box {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-}
-
-.sidebar-box h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 8px;
-}
-
-.status-indicator {
-    display: flex;
-    align-items: center;
-}
-
-.dot {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.dot.online {
-    background-color: #00ff00;
-    box-shadow: 0 0 8px #00ff00;
-}
-
-.sidebar-btn {
-    display: block;
+/* Operational Handlers Buttons */
+.brutal-btn {
     background-color: var(--accent);
-    color: white;
+    color: var(--text);
+    border: 2px solid var(--border);
+    padding: var(--sp-12) var(--sp-24);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--border);
+    transition: all 0.15s ease;
     text-align: center;
     text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-top: 15px;
-    transition: background 0.2s;
 }
 
-.sidebar-btn:hover {
-    background-color: #0077b6;
+.brutal-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--border); }
+.brutal-btn:active { transform: translate(2px, 2px); box-shadow: none; }
+.brutal-btn.danger { background-color: var(--danger); color: white; }
+
+/* Sidebar Component Containers */
+.sidebar-box {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border);
+    padding: var(--sp-24);
+    box-shadow: 4px 4px 0 var(--border);
 }
 
-footer {
+.sidebar-box h3 { border-bottom: 2px solid var(--border); padding-bottom: var(--sp-8); margin-bottom: var(--sp-16); }
+.status-indicator { display: flex; align-items: center; gap: var(--sp-12); }
+.status-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--border); background-color: #ff6b6b; }
+.status-dot.online { background-color: #00ff00; }
+.sidebar-btn { display: block; width: 100%; margin-top: var(--sp-16); }
+
+/* Administrative Backdoors Styling */
+.admin-actions { display: flex; gap: var(--sp-16); margin-top: var(--sp-8); }
+.status-msg { margin-top: var(--sp-16); font-weight: 700; font-size: 0.95rem; }
+.secret-link {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 0.75rem;
+    cursor: pointer;
     text-align: center;
-    padding: 40px;
-    margin-top: 60px;
-    border-top: 1px solid var(--border-color);
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-top: var(--sp-16);
+    font-family: inherit;
 }
+.secret-link:hover { color: var(--text); }
 
+/* Footnotes Section */
+.brutal-footer { background-color: var(--dark-block); color: var(--card-bg); padding: var(--sp-32) 0; border-top: 2px solid var(--border); margin-top: var(--sp-64); }
+.footer-content { display: flex; justify-content: space-between; align-items: center; }
+.brutal-footer p { font-size: 0.85rem; color: #666666; font-weight: 500; }
+
+/* Responsiveness Settings */
 @media (max-width: 900px) {
-    .forum-container { flex-direction: column; }
-    .navbar { padding: 20px; }
+    .forum-layout { flex-direction: column; gap: var(--sp-32); }
+    .footer-content { flex-direction: column; gap: var(--sp-16); text-align: center; }
 }
