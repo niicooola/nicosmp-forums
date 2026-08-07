@@ -21,7 +21,7 @@ const defaultAnnouncements = [
     }
 ];
 
-// Handles the tab rendering routing swaps
+// Handles the tab rendering routing swaps with password gatekeeper
 function setupTabRouting() {
     const tabAnnounce = document.getElementById('tab-announcements');
     const tabTickets = document.getElementById('tab-tickets');
@@ -47,22 +47,35 @@ function setupTabRouting() {
         viewAdmin.classList.add('hidden');
     });
 
-    // Secret dashboard toggle handler
+    // Secret dashboard toggle handler with password protection
     const secretTrigger = document.getElementById('secret-dashboard-trigger');
     if (secretTrigger) {
         secretTrigger.addEventListener('click', () => {
-            viewAdmin.classList.toggle('hidden');
-            viewAnnounce.classList.add('hidden');
-            viewTickets.classList.add('hidden');
-            tabAnnounce.classList.remove('active');
-            tabTickets.classList.remove('active');
-            viewAdmin.scrollIntoView({ behavior: 'smooth' });
+            // Close panel without prompt if it's already visible
+            if (!viewAdmin.classList.contains('hidden')) {
+                viewAdmin.classList.add('hidden');
+                viewAnnounce.classList.remove('hidden');
+                tabAnnounce.classList.add('active');
+                return;
+            }
+
+            const pass = prompt("Enter Admin Password:");
+            if (pass === "NicoSMP2026") {
+                viewAdmin.classList.remove('hidden');
+                viewAnnounce.classList.add('hidden');
+                viewTickets.classList.add('hidden');
+                tabAnnounce.classList.remove('active');
+                tabTickets.classList.remove('active');
+                viewAdmin.scrollIntoView({ behavior: 'smooth' });
+            } else if (pass !== null) {
+                alert("Access Denied: Incorrect Password!");
+            }
         });
     }
 }
 
 // Loads announcements out of local storage history loop arrays
-function loadAnnouncements Feed() {
+function loadAnnouncementsFeed() {
     const container = document.getElementById('announcements-list');
     if (!container) return;
 
